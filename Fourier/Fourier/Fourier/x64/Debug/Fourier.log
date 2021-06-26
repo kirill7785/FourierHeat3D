@@ -1,0 +1,10 @@
+﻿  pch.cpp
+  dllmain.cpp
+  Fourier.cpp
+C:\Users\Kirill\Desktop\CFD\Fourier\Fourier\Fourier.cpp(268,11): warning C4129: : неизвестная escape-последовательность
+C:\Users\Kirill\Desktop\CFD\Fourier\Fourier\Fourier.cpp(292,11): warning C4129: : неизвестная escape-последовательность
+C:\Users\Kirill\Desktop\CFD\Fourier\Fourier\Fourier.cpp(317,11): warning C4129: : неизвестная escape-последовательность
+C:\Users\Kirill\Desktop\CFD\Fourier\Fourier\Fourier.cpp(341,11): warning C4129: : неизвестная escape-последовательность
+  Создание кода...
+     Создается библиотека C:\Users\Kirill\Desktop\CFD\Fourier\x64\Debug\Fourier.lib и объект C:\Users\Kirill\Desktop\CFD\Fourier\x64\Debug\Fourier.exp
+  Fourier.vcxproj -> C:\Users\Kirill\Desktop\CFD\Fourier\x64\Debug\Fourier.dll
