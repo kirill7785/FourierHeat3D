@@ -104,7 +104,7 @@ var
    Rt : Real;
    d_check : Single;
    size_x, size_y, size_gx, distance_x, distance_y, Tamb, Pdiss : Real;
-   n_x, n_y, n_gx, time, im, is1 : Integer;
+   n_x, n_y, n_gx, time, im, is1, i, j : Integer;
    bOk, bfloat : Boolean;
    f : TStrings; // переменная типа объект TStringList
    s : string; // записываемая строка и имя записываемого файла
@@ -542,6 +542,21 @@ begin
      // GPU id
      s:=IntToStr(FormLauncher.ComboBoxGPUid.ItemIndex);
      f.Add(s);
+
+     // 25.07.2021
+     // Замена запятых на точку так чтобы нормально считывалось в Visual Studio.
+     for i := 0 to f.Count-1 do
+     begin
+       s:=f.Strings[i];
+       for j := 1 to length(s) do
+       begin
+          if (s[j]=',') then
+          begin
+             s[j]:='.';
+          end;
+       end;
+       f.Strings[i]:=s;
+     end;
 
 
      f.SaveToFile('source.txt');  // сохраняю результат
