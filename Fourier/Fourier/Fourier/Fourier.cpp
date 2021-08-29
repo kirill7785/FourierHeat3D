@@ -1,5 +1,5 @@
 // Fourier.cpp : Defines the exported functions for the DLL.
-// Рабочая версия от 18.06.2021
+// Р Р°Р±РѕС‡Р°СЏ РІРµСЂСЃРёСЏ РѕС‚ 18.06.2021
 
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
 #include <utility>
@@ -18,7 +18,7 @@
 //typedef float Real;
 const double M_PI = 3.14159265;
 
-// Выделяет оперативную память под вектор u.
+// Р’С‹РґРµР»СЏРµС‚ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ РїРѕРґ РІРµРєС‚РѕСЂ u.
 template <typename doublerealT>
 void alloc_u3D(doublerealT***& u, int m, int n, int l) {
 	u = new doublerealT * *[m + 2];
@@ -30,7 +30,7 @@ void alloc_u3D(doublerealT***& u, int m, int n, int l) {
 	}
 }
 
-// Освобождает оперативную память из под вектора u.
+// РћСЃРІРѕР±РѕР¶РґР°РµС‚ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ РёР· РїРѕРґ РІРµРєС‚РѕСЂР° u.
 template <typename doublerealT>
 void free_u3D(doublerealT***& u, int m, int n, int l) {
 	for (int i = 0; i <= m + 1; ++i) {
@@ -44,7 +44,7 @@ void free_u3D(doublerealT***& u, int m, int n, int l) {
 	delete[] u;
 }
 
-// Инициализирует массив u значением initVal.
+// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РјР°СЃСЃРёРІ u Р·РЅР°С‡РµРЅРёРµРј initVal.
 template <typename doublerealT>
 void init_u3D(doublerealT***& u, int m, int n, int l, doublerealT initVal) {
 
@@ -60,7 +60,7 @@ void init_u3D(doublerealT***& u, int m, int n, int l, doublerealT initVal) {
 
 //typedef std::complex<Real> base;
 
-// Использует выделения и уничтожения памяти внутри fft.
+// РСЃРїРѕР»СЊР·СѓРµС‚ РІС‹РґРµР»РµРЅРёСЏ Рё СѓРЅРёС‡С‚РѕР¶РµРЅРёСЏ РїР°РјСЏС‚Рё РІРЅСѓС‚СЂРё fft.
 template <typename doublerealT>
 void fft_non_optimaze_memory(std::complex<doublerealT>*& a, int n, bool invert) {
 
@@ -96,7 +96,7 @@ void fft_non_optimaze_memory(std::complex<doublerealT>*& a, int n, bool invert) 
 }
 
 
-// На месте без выделенния и уничтожения оперативной памяти.
+// РќР° РјРµСЃС‚Рµ Р±РµР· РІС‹РґРµР»РµРЅРЅРёСЏ Рё СѓРЅРёС‡С‚РѕР¶РµРЅРёСЏ РѕРїРµСЂР°С‚РёРІРЅРѕР№ РїР°РјСЏС‚Рё.
 template <typename doublerealT>
 void fft0(std::complex<doublerealT>*& a, int n, bool invert) {
 
@@ -135,7 +135,7 @@ void fft0(std::complex<doublerealT>*& a, int n, bool invert) {
 
 
 int MAXN = 262145;
-// Максимальное число потоков в процессоре.
+// РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РїРѕС‚РѕРєРѕРІ РІ РїСЂРѕС†РµСЃСЃРѕСЂРµ.
 const int NUMBER_THREADS = omp_get_num_procs(); //256;
 
 const int MAXN_rev = 262145;
@@ -146,7 +146,7 @@ std::complex<doublerealT>** a1_gl = nullptr;
 template <typename doublerealT>
 std::complex<doublerealT>** wlen_pw_gl = nullptr;
 
-// Вспомогательная процедура для быстрого преобразования Фурье на месте.
+// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ Р¤СѓСЂСЊРµ РЅР° РјРµСЃС‚Рµ.
 void calc_rev(int n) {
 
 	int lg_n = 0;
@@ -168,7 +168,7 @@ void calc_rev(int n) {
 	}*/
 }
 
-// Быстрое преобразование Фурье.
+// Р‘С‹СЃС‚СЂРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р¤СѓСЂСЊРµ.
 template <typename doublerealT>
 void fft(std::complex<doublerealT>* &a, int n, bool invert, std::complex<doublerealT>* &wlen_pw) {
 
@@ -204,7 +204,7 @@ void fft(std::complex<doublerealT>* &a, int n, bool invert, std::complex<doubler
 			a[i] /= n;
 }
 
-// Вызывает быстрое преобразование Фурье.
+// Р’С‹Р·С‹РІР°РµС‚ Р±С‹СЃС‚СЂРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р¤СѓСЂСЊРµ.
 template <typename doublerealT>
 void DFTx(doublerealT***& u, doublerealT***& a, int m, int n, int l) {
 
@@ -212,7 +212,7 @@ void DFTx(doublerealT***& u, doublerealT***& a, int m, int n, int l) {
 	int Ny = n + 1; // < N+2
 	int Nz = l + 1;
 
-	// Находим искомую функцию.
+	// РќР°С…РѕРґРёРј РёСЃРєРѕРјСѓСЋ С„СѓРЅРєС†РёСЋ.
 
 	calc_rev(Nx - 2);
 
@@ -243,7 +243,7 @@ void DFTx(doublerealT***& u, doublerealT***& a, int m, int n, int l) {
 
 }
 
-// Вызывает быстрое преобразование Фурье.
+// Р’С‹Р·С‹РІР°РµС‚ Р±С‹СЃС‚СЂРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р¤СѓСЂСЊРµ.
 template <typename doublerealT>
 void DFTy(doublerealT***& u, doublerealT***& a, int m, int n, int l) {
 
@@ -253,7 +253,7 @@ void DFTy(doublerealT***& u, doublerealT***& a, int m, int n, int l) {
 
 	calc_rev(Ny - 2);
 
-	// Находим искомую функцию.
+	// РќР°С…РѕРґРёРј РёСЃРєРѕРјСѓСЋ С„СѓРЅРєС†РёСЋ.
 #pragma omp parallel for
 	for (int k = 1; k < Nz - 1; ++k) {
 
@@ -277,7 +277,7 @@ void DFTy(doublerealT***& u, doublerealT***& a, int m, int n, int l) {
 	}
 }
 
-// Вызывает быстрое преобразование Фурье.
+// Р’С‹Р·С‹РІР°РµС‚ Р±С‹СЃС‚СЂРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р¤СѓСЂСЊРµ.
 template <typename doublerealT>
 void IDFTx(doublerealT***& u, doublerealT***& f, int m, int n, int l) {
 
@@ -287,7 +287,7 @@ void IDFTx(doublerealT***& u, doublerealT***& f, int m, int n, int l) {
 
 	calc_rev(Nx - 2);
 
-	// Преобразование правой части.
+	// РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё.
 #pragma omp parallel for
 	for (int k = 1; k < Nz - 1; ++k) {
 
@@ -315,7 +315,7 @@ void IDFTx(doublerealT***& u, doublerealT***& f, int m, int n, int l) {
 	}
 }
 
-// Вызывает быстрое преобразование Фурье.
+// Р’С‹Р·С‹РІР°РµС‚ Р±С‹СЃС‚СЂРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р¤СѓСЂСЊРµ.
 template <typename doublerealT>
 void IDFTy(doublerealT***& u, doublerealT***& f, int m, int n, int l) {
 
@@ -325,7 +325,7 @@ void IDFTy(doublerealT***& u, doublerealT***& f, int m, int n, int l) {
 
 	calc_rev(Ny - 2);
 
-	// Преобразование правой части.
+	// РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё.
 #pragma omp parallel for
 	for (int k = 1; k < Nz - 1; ++k) {
 
@@ -350,7 +350,7 @@ void IDFTy(doublerealT***& u, doublerealT***& f, int m, int n, int l) {
 	}
 }
 
-// В массив source копирует массив b со знаком плюс или минус.
+// Р’ РјР°СЃСЃРёРІ source РєРѕРїРёСЂСѓРµС‚ РјР°СЃСЃРёРІ b СЃРѕ Р·РЅР°РєРѕРј РїР»СЋСЃ РёР»Рё РјРёРЅСѓСЃ.
 template <typename doublerealT>
 void copy3D(doublerealT***& source, doublerealT***& b, int m, int n, int l,
 	bool plus, bool scal, doublerealT val) {
@@ -360,7 +360,7 @@ void copy3D(doublerealT***& source, doublerealT***& b, int m, int n, int l,
 	int Nz = l + 1;
 
 	if (scal) {
-		// добавляем скаляр.
+		// РґРѕР±Р°РІР»СЏРµРј СЃРєР°Р»СЏСЂ.
 #pragma omp parallel for
 		for (int i = 0; i <= Nx; ++i) {
 			for (int j = 0; j <= Ny; ++j) {
@@ -402,18 +402,18 @@ void copy3D(doublerealT***& source, doublerealT***& b, int m, int n, int l,
 } // copy3D
 
 
-// экспорт 3D полевой величины u в программу tecplot 360.
+// СЌРєСЃРїРѕСЂС‚ 3D РїРѕР»РµРІРѕР№ РІРµР»РёС‡РёРЅС‹ u РІ РїСЂРѕРіСЂР°РјРјСѓ tecplot 360.
 template <typename doublerealT>
 void exporttecplot3D(doublerealT***& u, doublerealT*& x, doublerealT*& y, doublerealT*& z, int m, int n, int l) {
 	FILE* fp;
 	errno_t err;
-	// создание файла для записи.
+	// СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё.
 	if ((err = fopen_s(&fp, "temperature_xyz_plot.PLT", "w")) != 0) {
 		printf("Create File Error\n");
 	}
 	else {
 
-		// запись имён переменных
+		// Р·Р°РїРёСЃСЊ РёРјС‘РЅ РїРµСЂРµРјРµРЅРЅС‹С…
 		fprintf(fp, "VARIABLES = x y z Temperature\n");
 		fprintf(fp, "zone\n");
 		fprintf(fp, "I=%d, J=%d, K=%d, F=POINT\n", m + 2, n + 2, l + 2);
@@ -427,18 +427,18 @@ void exporttecplot3D(doublerealT***& u, doublerealT*& x, doublerealT*& y, double
 
 } // exporttecplot3D
 
-// экспорт 3D полевой величины u в программу tecplot 360.
+// СЌРєСЃРїРѕСЂС‚ 3D РїРѕР»РµРІРѕР№ РІРµР»РёС‡РёРЅС‹ u РІ РїСЂРѕРіСЂР°РјРјСѓ tecplot 360.
 template <typename doublerealT>
 void exporttecplot3D_fft(doublerealT***& u, doublerealT*& x, doublerealT*& y, doublerealT*& z, int m, int n, int l) {
 	FILE* fp;
 	errno_t err;
-	// создание файла для записи.
+	// СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё.
 	if ((err = fopen_s(&fp, "temperature_xyz_plot.PLT", "w")) != 0) {
 		printf("Create File Error\n");
 	}
 	else {
 
-		// запись имён переменных
+		// Р·Р°РїРёСЃСЊ РёРјС‘РЅ РїРµСЂРµРјРµРЅРЅС‹С…
 		fprintf(fp, "VARIABLES = x y z Temperature\n");
 		fprintf(fp, "zone\n");
 		fprintf(fp, "I=%d, J=%d, K=%d, F=POINT\n", m - 1, n - 1, l + 2);
@@ -453,18 +453,18 @@ void exporttecplot3D_fft(doublerealT***& u, doublerealT*& x, doublerealT*& y, do
 } // exporttecplot3D_fft
 
 
-// экспорт 3D полевой величины u в программу tecplot 360.
+// СЌРєСЃРїРѕСЂС‚ 3D РїРѕР»РµРІРѕР№ РІРµР»РёС‡РёРЅС‹ u РІ РїСЂРѕРіСЂР°РјРјСѓ tecplot 360.
 template <typename doublerealT>
 void exporttecplot3D22D(doublerealT***& u, doublerealT*& x, doublerealT*& y, doublerealT*& z, int m, int n, int l) {
 	FILE* fp;
 	errno_t err;
-	// создание файла для записи.
+	// СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё.
 	if ((err = fopen_s(&fp, "temperature_xy_plot.PLT", "w")) != 0) {
 		printf("Create File Error\n");
 	}
 	else {
 
-		// запись имён переменных
+		// Р·Р°РїРёСЃСЊ РёРјС‘РЅ РїРµСЂРµРјРµРЅРЅС‹С…
 		fprintf(fp, "VARIABLES = x y Temperature\n");
 		fprintf(fp, "zone\n");
 		fprintf(fp, "I=%d, J=%d, K=1, F=POINT\n", m + 2, n + 2);
@@ -478,18 +478,18 @@ void exporttecplot3D22D(doublerealT***& u, doublerealT*& x, doublerealT*& y, dou
 
 } // exporttecplot3D2_2D
 
-// экспорт 3D полевой величины u в программу tecplot 360.
+// СЌРєСЃРїРѕСЂС‚ 3D РїРѕР»РµРІРѕР№ РІРµР»РёС‡РёРЅС‹ u РІ РїСЂРѕРіСЂР°РјРјСѓ tecplot 360.
 template <typename doublerealT>
 void exporttecplot3D21D(doublerealT***& u, doublerealT*& x, doublerealT*& y, doublerealT*& z, int m, int n, int l) {
 	FILE* fp;
 	errno_t err;
-	// создание файла для записи.
+	// СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё.
 	if ((err = fopen_s(&fp, "temperature_x_plot.PLT", "w")) != 0) {
 		printf("Create File Error\n");
 	}
 	else {
 
-		// запись имён переменных
+		// Р·Р°РїРёСЃСЊ РёРјС‘РЅ РїРµСЂРµРјРµРЅРЅС‹С…
 		fprintf(fp, "VARIABLES = x Temperature\n");
 		
 		int j0 = (n + 1) / 2;
@@ -503,25 +503,25 @@ void exporttecplot3D21D(doublerealT***& u, doublerealT*& x, doublerealT*& y, dou
 
 } // exporttecplot3D2_1D
 
-// Структура для описания одного слоя подложки.
+// РЎС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ РѕРїРёСЃР°РЅРёСЏ РѕРґРЅРѕРіРѕ СЃР»РѕСЏ РїРѕРґР»РѕР¶РєРё.
 template <typename doublerealT>
 struct STACK_LAYERS {
-	doublerealT chikness; // Толщина в м.
-	doublerealT lambda; // теплопроводность, Вт/(м*К).
-	int idiv_layer; // Количество ячеек в слое по толщине.
-	doublerealT mplane, mortho; // Ортотропность коэффициента теплопроводности 24.05.2021.
-	// Для расчёта вклада каждого слоя в Rt.
+	doublerealT chikness; // РўРѕР»С‰РёРЅР° РІ Рј.
+	doublerealT lambda; // С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ, Р’С‚/(Рј*Рљ).
+	int idiv_layer; // РљРѕР»РёС‡РµСЃС‚РІРѕ СЏС‡РµРµРє РІ СЃР»РѕРµ РїРѕ С‚РѕР»С‰РёРЅРµ.
+	doublerealT mplane, mortho; // РћСЂС‚РѕС‚СЂРѕРїРЅРѕСЃС‚СЊ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚Рё 24.05.2021.
+	// Р”Р»СЏ СЂР°СЃС‡С‘С‚Р° РІРєР»Р°РґР° РєР°Р¶РґРѕРіРѕ СЃР»РѕСЏ РІ Rt.
 	doublerealT Tmax;
-	doublerealT alpha; // Температурная зависимость теплопроводности.
-	//std::string name; // имя материала.
+	doublerealT alpha; // РўРµРјРїРµСЂР°С‚СѓСЂРЅР°СЏ Р·Р°РІРёСЃРёРјРѕСЃС‚СЊ С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚Рё.
+	//std::string name; // РёРјСЏ РјР°С‚РµСЂРёР°Р»Р°.
 	char* name;
 };
 
-// Процедура mesh_size
-// подбирает размер равномерной сетки в плоскости Oxy в 
-// целях экономии ресурсов памяти и увеличения быстродействия,
-// подбирает сетку так чтобы рассчитываемая топология в плоскости Oxy 
-// была разрешена расчётной сеткойи эта сетка не была избыточной.
+// РџСЂРѕС†РµРґСѓСЂР° mesh_size
+// РїРѕРґР±РёСЂР°РµС‚ СЂР°Р·РјРµСЂ СЂР°РІРЅРѕРјРµСЂРЅРѕР№ СЃРµС‚РєРё РІ РїР»РѕСЃРєРѕСЃС‚Рё Oxy РІ 
+// С†РµР»СЏС… СЌРєРѕРЅРѕРјРёРё СЂРµСЃСѓСЂСЃРѕРІ РїР°РјСЏС‚Рё Рё СѓРІРµР»РёС‡РµРЅРёСЏ Р±С‹СЃС‚СЂРѕРґРµР№СЃС‚РІРёСЏ,
+// РїРѕРґР±РёСЂР°РµС‚ СЃРµС‚РєСѓ С‚Р°Рє С‡С‚РѕР±С‹ СЂР°СЃСЃС‡РёС‚С‹РІР°РµРјР°СЏ С‚РѕРїРѕР»РѕРіРёСЏ РІ РїР»РѕСЃРєРѕСЃС‚Рё Oxy 
+// Р±С‹Р»Р° СЂР°Р·СЂРµС€РµРЅР° СЂР°СЃС‡С‘С‚РЅРѕР№ СЃРµС‚РєРѕР№Рё СЌС‚Р° СЃРµС‚РєР° РЅРµ Р±С‹Р»Р° РёР·Р±С‹С‚РѕС‡РЅРѕР№.
 template <typename doublerealT>
 void mesh_size(int &N, int &M,
 	int n_xgr, int n_y, doublerealT&lengthx, doublerealT&lengthy,
@@ -628,7 +628,7 @@ void mesh_size(int &N, int &M,
 																// Ok
 															}
 															else {
-																// СБОЙ
+																// РЎР‘РћР™
 															}
 														}
 													}
@@ -724,7 +724,7 @@ void mesh_size(int &N, int &M,
 													// Ok
 												}
 												else {
-													// СБОЙ
+													// РЎР‘РћР™
 												}
 											}
 										}
@@ -740,15 +740,15 @@ void mesh_size(int &N, int &M,
 } // mesh_size
 
 
-// Ядро солвера.
-// Реализует метод прогонки с трёхдиагональной матрицей для решения 
-// вдоль вертикального направления перпендикулярно слоям подложки.
+// РЇРґСЂРѕ СЃРѕР»РІРµСЂР°.
+// Р РµР°Р»РёР·СѓРµС‚ РјРµС‚РѕРґ РїСЂРѕРіРѕРЅРєРё СЃ С‚СЂС‘С…РґРёР°РіРѕРЅР°Р»СЊРЅРѕР№ РјР°С‚СЂРёС†РµР№ РґР»СЏ СЂРµС€РµРЅРёСЏ 
+// РІРґРѕР»СЊ РІРµСЂС‚РёРєР°Р»СЊРЅРѕРіРѕ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅРѕ СЃР»РѕСЏРј РїРѕРґР»РѕР¶РєРё.
 template <typename doublerealT>
 void progonka(int Nx, int Ny, int Nz,
 	doublerealT* &lambda, doublerealT* &lambda_multiplyer_normal, doublerealT* & lambda_multiplyer_plane,
 	doublerealT* &hz, doublerealT h1, doublerealT h2, doublerealT*** &b, doublerealT*** &a)
 {
-	// Ядро солвера.
+	// РЇРґСЂРѕ СЃРѕР»РІРµСЂР°.
 #pragma omp parallel for
 	for (int i = 1; i < Nx - 1; ++i) {
 		for (int j = 1; j < Ny - 1; ++j) {
@@ -761,7 +761,7 @@ void progonka(int Nx, int Ny, int Nz,
 			doublerealT Rjm1 = lambda_multiplyer_normal[1] * (2.0 * lambda[0] * lambda[1] / (lambda[0] + lambda[1])) *
 				(2.0 / (hz[0] * (hz[1] + hz[0])));
 
-			// Для фиксированного k решение системы  с трёх диагональной матрицей:
+			// Р”Р»СЏ С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРіРѕ k СЂРµС€РµРЅРёРµ СЃРёСЃС‚РµРјС‹  СЃ С‚СЂС‘С… РґРёР°РіРѕРЅР°Р»СЊРЅРѕР№ РјР°С‚СЂРёС†РµР№:
 			doublerealT b1 = Rj1;
 			doublerealT a1 = (2.0 / (h1 * h1) + 2.0 / (h2 * h2)) * lambda[1] * lambda_multiplyer_plane[1] + 
 				(Rj1 + Rjm1) - 2.0 * cos(2.0 * M_PI * i / Nx) * lambda[1] * lambda_multiplyer_plane[1] / (h1 * h1) -
@@ -805,9 +805,9 @@ void progonka(int Nx, int Ny, int Nz,
 	}
 } // progonka
 
-// Начало 18.05.2021 - окончание 31.05.2021.
-// Находит статическое тепловое сопротивление для постоянных
-// коэффициентов теплопроводности не зависящих от температуры.
+// РќР°С‡Р°Р»Рѕ 18.05.2021 - РѕРєРѕРЅС‡Р°РЅРёРµ 31.05.2021.
+// РќР°С…РѕРґРёС‚ СЃС‚Р°С‚РёС‡РµСЃРєРѕРµ С‚РµРїР»РѕРІРѕРµ СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёРµ РґР»СЏ РїРѕСЃС‚РѕСЏРЅРЅС‹С…
+// РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚Рё РЅРµ Р·Р°РІРёСЃСЏС‰РёС… РѕС‚ С‚РµРјРїРµСЂР°С‚СѓСЂС‹.
 template <typename doublerealT>
 void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	doublerealT size_x, doublerealT size_y, doublerealT distance_x, doublerealT distance_y,
@@ -827,16 +827,16 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	doublerealT mortogonal7, doublerealT mortogonal8, doublerealT mortogonal9,
 	int &time, doublerealT Tamb, doublerealT Pdiss, bool export3D, bool exportxy2D, bool exportx1D) {
 
-	// Замер времени.
-	unsigned int calculation_start_time = 0; // начало счёта мс.
-	unsigned int calculation_end_time = 0; // окончание счёта мс.
-	unsigned int calculation_seach_time = 0; // время выполнения участка кода в мс.
+	// Р—Р°РјРµСЂ РІСЂРµРјРµРЅРё.
+	unsigned int calculation_start_time = 0; // РЅР°С‡Р°Р»Рѕ СЃС‡С‘С‚Р° РјСЃ.
+	unsigned int calculation_end_time = 0; // РѕРєРѕРЅС‡Р°РЅРёРµ СЃС‡С‘С‚Р° РјСЃ.
+	unsigned int calculation_seach_time = 0; // РІСЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ СѓС‡Р°СЃС‚РєР° РєРѕРґР° РІ РјСЃ.
 
 	calculation_start_time = clock();
 
-	doublerealT*** u = nullptr, *** source = nullptr; // рассчитываемый потенциал и тепловая мощность.
+	doublerealT*** u = nullptr, *** source = nullptr; // СЂР°СЃСЃС‡РёС‚С‹РІР°РµРјС‹Р№ РїРѕС‚РµРЅС†РёР°Р» Рё С‚РµРїР»РѕРІР°СЏ РјРѕС‰РЅРѕСЃС‚СЊ.
 
-	doublerealT*** a = nullptr, *** b = nullptr; // Коэффициенты разложения в дискретный ряд Фурье.
+	doublerealT*** a = nullptr, *** b = nullptr; // РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ СЂР°Р·Р»РѕР¶РµРЅРёСЏ РІ РґРёСЃРєСЂРµС‚РЅС‹Р№ СЂСЏРґ Р¤СѓСЂСЊРµ.
 
 	doublerealT Pdiss_sum = 0.0;
 
@@ -852,11 +852,11 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	M = 32;
 	N = 159;*/
 
-	//doublerealT Tamb = 22.0; // - температура корпуса задаётся пользователем. 
+	//doublerealT Tamb = 22.0; // - С‚РµРјРїРµСЂР°С‚СѓСЂР° РєРѕСЂРїСѓСЃР° Р·Р°РґР°С‘С‚СЃСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј. 
 
 	//Tamb = 0.0;
 
-	// постоянные шаги сетки h1 по оси x и h2 по оси y.
+	// РїРѕСЃС‚РѕСЏРЅРЅС‹Рµ С€Р°РіРё СЃРµС‚РєРё h1 РїРѕ РѕСЃРё x Рё h2 РїРѕ РѕСЃРё y.
 	doublerealT h1 = (doublerealT)(lengthx / (M + 1));
 	doublerealT h2 = (doublerealT)(lengthy / (N + 1));
 
@@ -940,7 +940,7 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	if (b1) {
 		//const int idiv_layer = 4;		
 		stack_layer[0].chikness = d1;// 1.6e-3;
-		stack_layer[0].lambda = k1; // МД40
+		stack_layer[0].lambda = k1; // РњР”40
 		stack_layer[0].idiv_layer = 14;
 		stack_layer[0].mplane = mplane1;
 		stack_layer[0].mortho = mortogonal1;
@@ -1121,9 +1121,9 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	//doublerealT hzc = (doublerealT)(lengthz / (L + 1));
 	doublerealT* hz = new doublerealT[L + 2];
 	doublerealT* zf = new doublerealT[L + 2];
-	doublerealT* lambda = new doublerealT[L + 2];// Теплопроводность.
-	doublerealT* lambda_multiplyer_plane = new doublerealT[L + 2];// Теплопроводность.
-	doublerealT* lambda_multiplyer_normal = new doublerealT[L + 2];// Теплопроводность.
+	doublerealT* lambda = new doublerealT[L + 2];// РўРµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ.
+	doublerealT* lambda_multiplyer_plane = new doublerealT[L + 2];// РўРµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ.
+	doublerealT* lambda_multiplyer_normal = new doublerealT[L + 2];// РўРµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ.
 	int* layer_id = new int[L + 2];
 	/*for (int i = 0; i < L + 2; ++i) {
 		zf[i] = (doublerealT)(i * hzc);
@@ -1141,7 +1141,7 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	doublerealT q = 1.2;
 	doublerealT qinv = 1 / q;
 	hz[0] = stack_layer[0].chikness * (qinv - 1.0) / (pow(qinv, stack_layer[0].idiv_layer)-1.0);
-	// Постоянный шаг по оси z в каждом интервале.
+	// РџРѕСЃС‚РѕСЏРЅРЅС‹Р№ С€Р°Рі РїРѕ РѕСЃРё z РІ РєР°Р¶РґРѕРј РёРЅС‚РµСЂРІР°Р»Рµ.
 	//hz[0] = stack_layer[0].chikness / stack_layer[0].idiv_layer;
 	doublerealT qsum = 0.0;
 	int ic = 1;
@@ -1161,7 +1161,7 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 				for (int i7 = 0; i7 <= stack_layer[i].idiv_layer-1-j; ++i7) hz[ic] *= qinv;
 				qsum += hz[ic];
 			}
-			// Постоянный шаг по оси z в каждом интервале.
+			// РџРѕСЃС‚РѕСЏРЅРЅС‹Р№ С€Р°Рі РїРѕ РѕСЃРё z РІ РєР°Р¶РґРѕРј РёРЅС‚РµСЂРІР°Р»Рµ.
 			//hz[ic] = stack_layer[i].chikness / stack_layer[i].idiv_layer;
 			layer_id[ic] = i;
 			lambda[ic] = stack_layer[i].lambda;
@@ -1206,7 +1206,7 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	alloc_u3D(source, M, N, L);
 	alloc_u3D(b, M, N, L);
 
-	// инициализация.
+	// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ.
 	init_u3D<doublerealT>(b, M, N, L, 0.0);
 	init_u3D<doublerealT>(source, M, N, L, 0.0);
 
@@ -1215,11 +1215,11 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	int in_x = (int)(distance_x / h1);
 	int in_y = (int)(distance_y / h2);
 
-	// Задаём тепловую мощность тепловыделения.
-	//for (int i = M / 2 - 117; i < M / 2 + 124; i += 26) {// ПТБШ 1,25мм 2s 204Mb
-	//for (int i = M / 2 - 234; i < M / 2 + 240; i += 26) {// ПТБШ 2,5мм 2s 204Mb
-	//for (int i = M / 2 - 468; i < M / 2 + 480; i += 26) { // ПТБШ 5мм 2s 204Mb
-		//for (int i = M / 2 - 936; i < M / 2 + 946; i += 26) { // ПТБШ 10мм 4s 420Mb
+	// Р—Р°РґР°С‘Рј С‚РµРїР»РѕРІСѓСЋ РјРѕС‰РЅРѕСЃС‚СЊ С‚РµРїР»РѕРІС‹РґРµР»РµРЅРёСЏ.
+	//for (int i = M / 2 - 117; i < M / 2 + 124; i += 26) {// РџРўР‘РЁ 1,25РјРј 2s 204Mb
+	//for (int i = M / 2 - 234; i < M / 2 + 240; i += 26) {// РџРўР‘РЁ 2,5РјРј 2s 204Mb
+	//for (int i = M / 2 - 468; i < M / 2 + 480; i += 26) { // РџРўР‘РЁ 5РјРј 2s 204Mb
+		//for (int i = M / 2 - 936; i < M / 2 + 946; i += 26) { // РџРўР‘РЁ 10РјРј 4s 420Mb
 	int istart0 = M / 2 - (int)(0.5 * (in_x*n_xgr));
 	int iend0 = istart0 + ((int)((in_x * n_x))) + (in_x == 0 ? 3 : 1);
 
@@ -1232,7 +1232,7 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 		}
 
 		if (n_x == 0) {
-			// Один источник по оси oX
+			// РћРґРёРЅ РёСЃС‚РѕС‡РЅРёРє РїРѕ РѕСЃРё oX
 			int i = M / 2;
 			for (int j = (n_y == 1 ? N / 2 - 5 : N / 2 - (int)(0.5 * (in_y * (n_y)))); j < (n_y == 1 ? N / 2 + 5 : N / 2 + (int)(0.5 * (in_y * (n_y)) + (in_y == 0 ? 3 : 1))); j += (n_y == 1 ? 1 : in_y)) {
 				//if ((i - (M / 2 - 117)) % 26 == 0)
@@ -1265,7 +1265,7 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 		else {
 
 			for (int i = istart0; i < iend0; i += in_x) {
-				//for (int i = M / 2 - (int)(0.5*(in_x*n_x)); i < M / 2 + (int)(0.5 * (in_x * n_x)+(in_x == 0 ? 3 : 1)); i += in_x) { // ПТБШ 20мм 4s 420Mb
+				//for (int i = M / 2 - (int)(0.5*(in_x*n_x)); i < M / 2 + (int)(0.5 * (in_x * n_x)+(in_x == 0 ? 3 : 1)); i += in_x) { // РџРўР‘РЁ 20РјРј 4s 420Mb
 					//for (int j = N / 2 - 2; j < N / 2 + 3; ++j) {
 				for (int j = (n_y == 1 ? N / 2 - 5 : N / 2 - (int)(0.5 * (in_y * (n_y)))); j < (n_y == 1 ? N / 2 + 5 : N / 2 + (int)(0.5 * (in_y * (n_y)) + (in_y == 0 ? 3 : 1))); j += (n_y == 1 ? 1 : in_y)) {
 					//if ((i - (M / 2 - 117)) % 26 == 0)
@@ -1315,7 +1315,7 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 
 	init_u3D<doublerealT>(a, M, N, L, 0.0);
 
-	// Ядро солвера
+	// РЇРґСЂРѕ СЃРѕР»РІРµСЂР°
 	progonka(Nx, Ny, Nz, lambda, lambda_multiplyer_normal, lambda_multiplyer_plane, hz, h1, h2, b, a);
 
 	//std::cout << "2" << std::endl;
@@ -1373,13 +1373,13 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 
 	FILE* fp10;
 	errno_t err10;
-	// создание файла для записи.
+	// СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё.
 	if ((err10 = fopen_s(&fp10, "report_Table.txt", "w")) != 0) {
 		printf("Create File Error\n");
 	}
 	else {
 
-		// запись имён переменных
+		// Р·Р°РїРёСЃСЊ РёРјС‘РЅ РїРµСЂРµРјРµРЅРЅС‹С…
 		fprintf(fp10, "Delta T in layer, K; Thermal resistance in Layer, K/W - in %%\n");
 		for (int i7 = ilayer_count - 2; i7 >= 0; i7--) {
 			
@@ -1400,7 +1400,7 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 
 	
 
-	// экспорт 3D полевой величины u в программу tecplot 360.
+	// СЌРєСЃРїРѕСЂС‚ 3D РїРѕР»РµРІРѕР№ РІРµР»РёС‡РёРЅС‹ u РІ РїСЂРѕРіСЂР°РјРјСѓ tecplot 360.
 	//exporttecplot3D(u, xf, yf, zf, M, N, izstop - 1);
 	 
 	if (export3D) {
@@ -1440,9 +1440,9 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 	calculation_end_time = clock();
 	calculation_seach_time = calculation_end_time - calculation_start_time;
 	int im = 0, is = 0, ims = 0;
-	im = (int)(calculation_seach_time / 60000); // минуты
-	is = (int)((calculation_seach_time - 60000 * im) / 1000); // секунды
-	ims = (int)((calculation_seach_time - 60000 * im - 1000 * is)); // /10 миллисекунды делённые на 10
+	im = (int)(calculation_seach_time / 60000); // РјРёРЅСѓС‚С‹
+	is = (int)((calculation_seach_time - 60000 * im) / 1000); // СЃРµРєСѓРЅРґС‹
+	ims = (int)((calculation_seach_time - 60000 * im - 1000 * is)); // /10 РјРёР»Р»РёСЃРµРєСѓРЅРґС‹ РґРµР»С‘РЅРЅС‹Рµ РЅР° 10
 	//printf(" %1d:%2d:%3d \n", im, is, ims);
 
 	time = (int)(calculation_seach_time);
@@ -1453,9 +1453,9 @@ void FFTsolver3Dqlinear(doublerealT& thermal_resistance,
 } // DFTsolver3Dqlinear();
 
 
-// Начало 18.05.2021 - окончание 31.05.2021.
-// Находит статическое тепловое сопротивление для теплопроводностей
-// зависящих от температуры.
+// РќР°С‡Р°Р»Рѕ 18.05.2021 - РѕРєРѕРЅС‡Р°РЅРёРµ 31.05.2021.
+// РќР°С…РѕРґРёС‚ СЃС‚Р°С‚РёС‡РµСЃРєРѕРµ С‚РµРїР»РѕРІРѕРµ СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёРµ РґР»СЏ С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚РµР№
+// Р·Р°РІРёСЃСЏС‰РёС… РѕС‚ С‚РµРјРїРµСЂР°С‚СѓСЂС‹.
 template <typename doublerealT>
 void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 	doublerealT size_x, doublerealT size_y, doublerealT distance_x, doublerealT distance_y,
@@ -1478,16 +1478,16 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 	doublerealT alpha7, doublerealT alpha8, doublerealT alpha9,
 	int& time, doublerealT Tamb, doublerealT Pdiss, bool export3D, bool exportxy2D, bool exportx1D) {
 
-	// Замер времени.
-	unsigned int calculation_start_time = 0; // начало счёта мс.
-	unsigned int calculation_end_time = 0; // окончание счёта мс.
-	unsigned int calculation_seach_time = 0; // время выполнения участка кода в мс.
+	// Р—Р°РјРµСЂ РІСЂРµРјРµРЅРё.
+	unsigned int calculation_start_time = 0; // РЅР°С‡Р°Р»Рѕ СЃС‡С‘С‚Р° РјСЃ.
+	unsigned int calculation_end_time = 0; // РѕРєРѕРЅС‡Р°РЅРёРµ СЃС‡С‘С‚Р° РјСЃ.
+	unsigned int calculation_seach_time = 0; // РІСЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ СѓС‡Р°СЃС‚РєР° РєРѕРґР° РІ РјСЃ.
 
 	calculation_start_time = clock();
 
-	doublerealT*** u=nullptr, *** source=nullptr; // рассчитываемый потенциал и тепловая мощность.
+	doublerealT*** u=nullptr, *** source=nullptr; // СЂР°СЃСЃС‡РёС‚С‹РІР°РµРјС‹Р№ РїРѕС‚РµРЅС†РёР°Р» Рё С‚РµРїР»РѕРІР°СЏ РјРѕС‰РЅРѕСЃС‚СЊ.
 
-	doublerealT*** a=nullptr, *** b=nullptr; // Коэффициенты разложения в дискретный ряд Фурье.
+	doublerealT*** a=nullptr, *** b=nullptr; // РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ СЂР°Р·Р»РѕР¶РµРЅРёСЏ РІ РґРёСЃРєСЂРµС‚РЅС‹Р№ СЂСЏРґ Р¤СѓСЂСЊРµ.
 
 	doublerealT Pdiss_sum = 0.0;
 
@@ -1503,11 +1503,11 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 	M = 32;
 	N = 159;*/
 
-	//doublerealT Tamb = 22.0; // - температура корпуса задаётся пользователем. 
+	//doublerealT Tamb = 22.0; // - С‚РµРјРїРµСЂР°С‚СѓСЂР° РєРѕСЂРїСѓСЃР° Р·Р°РґР°С‘С‚СЃСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј. 
 
 	//Tamb = 0.0;
 
-	// постоянные шаги сетки h1 по оси x и h2 по оси y.
+	// РїРѕСЃС‚РѕСЏРЅРЅС‹Рµ С€Р°РіРё СЃРµС‚РєРё h1 РїРѕ РѕСЃРё x Рё h2 РїРѕ РѕСЃРё y.
 	doublerealT h1 = (doublerealT)(lengthx / (M + 1));
 	doublerealT h2 = (doublerealT)(lengthy / (N + 1));
 
@@ -1591,7 +1591,7 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 		//const int idiv_layer = 4;
 		stack_layer = new STACK_LAYERS<doublerealT>[ilayer_count];
 		stack_layer[0].chikness = d1;// 1.6e-3;
-		stack_layer[0].lambda = k1; // МД40
+		stack_layer[0].lambda = k1; // РњР”40
 		stack_layer[0].idiv_layer = 14;
 		stack_layer[0].mplane = mplane1;
 		stack_layer[0].mortho = mortogonal1;
@@ -1772,9 +1772,9 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 	//doublerealT hzc = (doublerealT)(lengthz / (L + 1));
 	doublerealT* hz = new doublerealT[L + 2];
 	doublerealT* zf = new doublerealT[L + 2];
-	doublerealT* lambda = new doublerealT[L + 2];// Теплопроводность.
-	doublerealT* lambda_multiplyer_plane = new doublerealT[L + 2];// Теплопроводность.
-	doublerealT* lambda_multiplyer_normal = new doublerealT[L + 2];// Теплопроводность.
+	doublerealT* lambda = new doublerealT[L + 2];// РўРµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ.
+	doublerealT* lambda_multiplyer_plane = new doublerealT[L + 2];// РўРµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ.
+	doublerealT* lambda_multiplyer_normal = new doublerealT[L + 2];// РўРµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ.
 	int* layer_id = new int[L + 2];
 	doublerealT* temp_maxz=new doublerealT[L + 2];
 	/*for (int i = 0; i < L + 2; ++i) {
@@ -1793,7 +1793,7 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 	doublerealT q = 1.2;
 	doublerealT qinv = 1 / q;
 	hz[0] = stack_layer[0].chikness * (qinv - 1.0) / (pow(qinv, stack_layer[0].idiv_layer) - 1.0);
-	// Постоянный шаг по оси z в каждом интервале.
+	// РџРѕСЃС‚РѕСЏРЅРЅС‹Р№ С€Р°Рі РїРѕ РѕСЃРё z РІ РєР°Р¶РґРѕРј РёРЅС‚РµСЂРІР°Р»Рµ.
 	//hz[0] = stack_layer[0].chikness / stack_layer[0].idiv_layer;
 	doublerealT qsum = 0.0;
 	int ic = 1;
@@ -1814,7 +1814,7 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 				for (int i7 = 0; i7 <= stack_layer[i].idiv_layer - 1 - j; ++i7) hz[ic] *= qinv;
 				qsum += hz[ic];
 			}
-			// Постоянный шаг по оси z в каждом интервале.
+			// РџРѕСЃС‚РѕСЏРЅРЅС‹Р№ С€Р°Рі РїРѕ РѕСЃРё z РІ РєР°Р¶РґРѕРј РёРЅС‚РµСЂРІР°Р»Рµ.
 			//hz[ic] = stack_layer[i].chikness / stack_layer[i].idiv_layer;
 			layer_id[ic] = i;
 			lambda[ic] = stack_layer[i].lambda;
@@ -1876,7 +1876,7 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 			a = nullptr;
 		}
 
-		// инициализация.
+		// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ.
 		init_u3D<doublerealT>(b, M, N, L, 0.0);
 		init_u3D<doublerealT>(source, M, N, L, 0.0);
 
@@ -1885,11 +1885,11 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 		int in_x = (int)(distance_x / h1);
 		int in_y = (int)(distance_y / h2);
 
-		// Задаём тепловую мощность тепловыделения.
-		//for (int i = M / 2 - 117; i < M / 2 + 124; i += 26) {// ПТБШ 1,25мм 2s 204Mb
-		//for (int i = M / 2 - 234; i < M / 2 + 240; i += 26) {// ПТБШ 2,5мм 2s 204Mb
-		//for (int i = M / 2 - 468; i < M / 2 + 480; i += 26) { // ПТБШ 5мм 2s 204Mb
-			//for (int i = M / 2 - 936; i < M / 2 + 946; i += 26) { // ПТБШ 10мм 4s 420Mb
+		// Р—Р°РґР°С‘Рј С‚РµРїР»РѕРІСѓСЋ РјРѕС‰РЅРѕСЃС‚СЊ С‚РµРїР»РѕРІС‹РґРµР»РµРЅРёСЏ.
+		//for (int i = M / 2 - 117; i < M / 2 + 124; i += 26) {// РџРўР‘РЁ 1,25РјРј 2s 204Mb
+		//for (int i = M / 2 - 234; i < M / 2 + 240; i += 26) {// РџРўР‘РЁ 2,5РјРј 2s 204Mb
+		//for (int i = M / 2 - 468; i < M / 2 + 480; i += 26) { // РџРўР‘РЁ 5РјРј 2s 204Mb
+			//for (int i = M / 2 - 936; i < M / 2 + 946; i += 26) { // РџРўР‘РЁ 10РјРј 4s 420Mb
 		int istart0 = M / 2 - (int)(0.5 * (in_x * n_xgr));
 		int iend0 = istart0 + ((int)((in_x * (n_x)))) + (in_x == 0 ? 3 : 1);
 
@@ -1902,7 +1902,7 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 			}
 
 			if (n_x == 0) {
-				// Один источник по оси oX
+				// РћРґРёРЅ РёСЃС‚РѕС‡РЅРёРє РїРѕ РѕСЃРё oX
 				int i = M / 2;
 				for (int j = (n_y == 1 ? N / 2 - 5 : N / 2 - (int)(0.5 * (in_y * (n_y)))); j < (n_y == 1 ? N / 2 + 5 : N / 2 + (int)(0.5 * (in_y * (n_y)) + (in_y == 0 ? 3 : 1))); j += (n_y == 1 ? 1 : in_y)) {
 					//if ((i - (M / 2 - 117)) % 26 == 0)
@@ -1935,7 +1935,7 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 			else {
 
 				for (int i = istart0; i < iend0; i += in_x) {
-					//for (int i = M / 2 - (int)(0.5*(in_x*n_x)); i < M / 2 + (int)(0.5 * (in_x * n_x)+(in_x == 0 ? 3 : 1)); i += in_x) { // ПТБШ 20мм 4s 420Mb
+					//for (int i = M / 2 - (int)(0.5*(in_x*n_x)); i < M / 2 + (int)(0.5 * (in_x * n_x)+(in_x == 0 ? 3 : 1)); i += in_x) { // РџРўР‘РЁ 20РјРј 4s 420Mb
 						//for (int j = N / 2 - 2; j < N / 2 + 3; ++j) {
 					for (int j = (n_y == 1 ? N / 2 - 5 : N / 2 - (int)(0.5 * (in_y * (n_y)))); j < (n_y == 1 ? N / 2 + 5 : N / 2 + (int)(0.5 * (in_y * (n_y)) + (in_y == 0 ? 3 : 1))); j += (n_y == 1 ? 1 : in_y)) {
 						//if ((i - (M / 2 - 117)) % 26 == 0)
@@ -1984,7 +1984,7 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 
 		init_u3D<doublerealT>(a, M, N, L, 0.0);
 
-		// Ядро солвера.
+		// РЇРґСЂРѕ СЃРѕР»РІРµСЂР°.
 		progonka(Nx, Ny, Nz, lambda, lambda_multiplyer_normal, lambda_multiplyer_plane, hz, h1, h2, b, a);
 
 		//std::cout << "2" << std::endl;
@@ -2070,13 +2070,13 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 
 	FILE* fp10;
 	errno_t err10;
-	// создание файла для записи.
+	// СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё.
 	if ((err10 = fopen_s(&fp10, "report_Table.txt", "w")) != 0) {
 		printf("Create File Error\n");
 	}
 	else {
 
-		// запись имён переменных
+		// Р·Р°РїРёСЃСЊ РёРјС‘РЅ РїРµСЂРµРјРµРЅРЅС‹С…
 		fprintf(fp10, "Pdiss=%e\n", Pdiss_sum);
 		fprintf(fp10, "Delta T in layer, K; Thermal resistance in Layer, K/W - in %%\n");
 		for (int i7 = ilayer_count - 2; i7 >= 0; i7--) {
@@ -2098,7 +2098,7 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 
 
 
-	// экспорт 3D полевой величины u в программу tecplot 360.
+	// СЌРєСЃРїРѕСЂС‚ 3D РїРѕР»РµРІРѕР№ РІРµР»РёС‡РёРЅС‹ u РІ РїСЂРѕРіСЂР°РјРјСѓ tecplot 360.
 	//exporttecplot3D(u, xf, yf, zf, M, N, izstop - 1);
 
 	if (export3D) {
@@ -2139,9 +2139,9 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 	calculation_end_time = clock();
 	calculation_seach_time = calculation_end_time - calculation_start_time;
 	int im = 0, is = 0, ims = 0;
-	im = (int)(calculation_seach_time / 60000); // минуты
-	is = (int)((calculation_seach_time - 60000 * im) / 1000); // секунды
-	ims = (int)((calculation_seach_time - 60000 * im - 1000 * is)); // /10 миллисекунды делённые на 10
+	im = (int)(calculation_seach_time / 60000); // РјРёРЅСѓС‚С‹
+	is = (int)((calculation_seach_time - 60000 * im) / 1000); // СЃРµРєСѓРЅРґС‹
+	ims = (int)((calculation_seach_time - 60000 * im - 1000 * is)); // /10 РјРёР»Р»РёСЃРµРєСѓРЅРґС‹ РґРµР»С‘РЅРЅС‹Рµ РЅР° 10
 	//printf(" %1d:%2d:%3d \n", im, is, ims);
 
 	time = (int)(calculation_seach_time);
@@ -2152,9 +2152,9 @@ void FFTsolver3Dqnonlinear(doublerealT& thermal_resistance,
 } // DFTsolver3Dqnonlinear();
 
 
-// Выделяет и освобождает общую оперативную память и вызывает решатели 
-// FFTsolver3Dqlinear - для постоянной теплопроводности,
-// FFTsolver3Dqnonlinear - для теплопроводности зависящей от температуры.
+// Р’С‹РґРµР»СЏРµС‚ Рё РѕСЃРІРѕР±РѕР¶РґР°РµС‚ РѕР±С‰СѓСЋ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ Рё РІС‹Р·С‹РІР°РµС‚ СЂРµС€Р°С‚РµР»Рё 
+// FFTsolver3Dqlinear - РґР»СЏ РїРѕСЃС‚РѕСЏРЅРЅРѕР№ С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚Рё,
+// FFTsolver3Dqnonlinear - РґР»СЏ С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚Рё Р·Р°РІРёСЃСЏС‰РµР№ РѕС‚ С‚РµРјРїРµСЂР°С‚СѓСЂС‹.
 void fourier_solve(
     double& thermal_resistance, double size_x, double size_y, double distance_x, double distance_y,
 	double size_gx, int n_x, int n_y, int n_gx,
@@ -2180,7 +2180,7 @@ void fourier_solve(
 	double eps = -1.0e-10;
 
 	if (bfloat) {
-		// Тип float.
+		// РўРёРї float.
 
 		float thermal_resistancef = (float)(thermal_resistance);
 
@@ -2232,7 +2232,7 @@ void fourier_solve(
 
 	}
 	else {
-		// Тип double.
+		// РўРёРї double.
 
 		
 
