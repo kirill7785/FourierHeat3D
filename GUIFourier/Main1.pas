@@ -8,9 +8,9 @@ uses
 
   type
   TMatherial = record
-    density : Real; // плотность
-    heatCapasity : Real; // Теплоёмкость при постоянном давлении
-    thermalConductivity : Real; // теплопроводность
+    density : Real; // РїР»РѕС‚РЅРѕСЃС‚СЊ
+    heatCapasity : Real; // РўРµРїР»РѕС‘РјРєРѕСЃС‚СЊ РїСЂРё РїРѕСЃС‚РѕСЏРЅРЅРѕРј РґР°РІР»РµРЅРёРё
+    thermalConductivity : Real; // С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ
     multiplyerConductivityPlane : Real;
     multiplyerConductivityNormal : Real;
     alphaForTemperatureDepend : Real;
@@ -106,8 +106,8 @@ var
    size_x, size_y, size_gx, distance_x, distance_y, Tamb, Pdiss : Real;
    n_x, n_y, n_gx, time, im, is1, i, j : Integer;
    bOk, bfloat : Boolean;
-   f : TStrings; // переменная типа объект TStringList
-   s : string; // записываемая строка и имя записываемого файла
+   f : TStrings; // РїРµСЂРµРјРµРЅРЅР°СЏ С‚РёРїР° РѕР±СЉРµРєС‚ TStringList
+   s : string; // Р·Р°РїРёСЃС‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° Рё РёРјСЏ Р·Р°РїРёСЃС‹РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°
    ShellInfo : TShellExecuteInfo;
    ExitCode : DWORD;
    QuoteParams : Boolean;
@@ -544,7 +544,7 @@ begin
      f.Add(s);
 
      // 25.07.2021
-     // Замена запятых на точку так чтобы нормально считывалось в Visual Studio.
+     // Р—Р°РјРµРЅР° Р·Р°РїСЏС‚С‹С… РЅР° С‚РѕС‡РєСѓ С‚Р°Рє С‡С‚РѕР±С‹ РЅРѕСЂРјР°Р»СЊРЅРѕ СЃС‡РёС‚С‹РІР°Р»РѕСЃСЊ РІ Visual Studio.
      for i := 0 to f.Count-1 do
      begin
        s:=f.Strings[i];
@@ -559,7 +559,7 @@ begin
      end;
 
 
-     f.SaveToFile('source.txt');  // сохраняю результат
+     f.SaveToFile('source.txt');  // СЃРѕС…СЂР°РЅСЏСЋ СЂРµР·СѓР»СЊС‚Р°С‚
      f.Free;
 
         ShellInfo.cbSize:=SizeOf(ShellInfo);
@@ -623,7 +623,7 @@ begin
      LabelThermalresistance.Caption:=FormatFloat('##.##',Rt);
      im:=time div 60000;
      is1:=(time - 60000*im) div 1000;
-     // Время решения.
+     // Р’СЂРµРјСЏ СЂРµС€РµРЅРёСЏ.
      Labelwait.Caption:=IntToStr(im)+' m '+IntToStr(is1)+' s '+IntToStr(time - 60000*im - 1000*is1)+' ms ';
    end;
   end
@@ -633,7 +633,7 @@ begin
   end;
 end;
 
-// Задаёт стек слоёв.
+// Р—Р°РґР°С‘С‚ СЃС‚РµРє СЃР»РѕС‘РІ.
 procedure TFormTopology.Button2Click(Sender: TObject);
 begin
    FormLayers.ShowModal;
@@ -644,13 +644,13 @@ begin
    Close;
 end;
 
-// Задаёт температуру корпуса и мощность тепловыделения.
+// Р—Р°РґР°С‘С‚ С‚РµРјРїРµСЂР°С‚СѓСЂСѓ РєРѕСЂРїСѓСЃР° Рё РјРѕС‰РЅРѕСЃС‚СЊ С‚РµРїР»РѕРІС‹РґРµР»РµРЅРёСЏ.
 procedure TFormTopology.Define2Click(Sender: TObject);
 begin
    FormConditions.ShowModal;
 end;
 
-// Задаёт настройки записи в файл.
+// Р—Р°РґР°С‘С‚ РЅР°СЃС‚СЂРѕР№РєРё Р·Р°РїРёСЃРё РІ С„Р°Р№Р».
 procedure TFormTopology.Export1Click(Sender: TObject);
 begin
     FormExport.ShowModal;
@@ -687,7 +687,7 @@ begin
    matherial[2].multiplyerConductivityNormal:=1.0;
    matherial[2].alphaForTemperatureDepend:=-1.5;
 
-   matherial[3].name:='сапфир';
+   matherial[3].name:='СЃР°РїС„РёСЂ';
    matherial[3].density:=4000;
    matherial[3].heatCapasity:=718;
    matherial[3].thermalConductivity:=28;
@@ -695,7 +695,7 @@ begin
    matherial[3].multiplyerConductivityNormal:=1.0;
    matherial[3].alphaForTemperatureDepend:=-1.0;
 
-   matherial[4].name:='алмаз';
+   matherial[4].name:='Р°Р»РјР°Р·';
    matherial[4].density:=3500;
    matherial[4].heatCapasity:=520;
    matherial[4].thermalConductivity:=2000;
@@ -711,7 +711,7 @@ begin
    matherial[5].multiplyerConductivityNormal:=1.0;
    matherial[5].alphaForTemperatureDepend:=-1.25;
 
-   matherial[6].name:='поликор';
+   matherial[6].name:='РїРѕР»РёРєРѕСЂ';
    matherial[6].density:=3760;
    matherial[6].heatCapasity:=750;
    matherial[6].thermalConductivity:=25;
@@ -735,7 +735,7 @@ begin
    matherial[8].multiplyerConductivityNormal:=1.0;
    matherial[8].alphaForTemperatureDepend:=0.0;
 
-   matherial[9].name:='МД40';
+   matherial[9].name:='РњР”40';
    matherial[9].density:=8900;
    matherial[9].heatCapasity:=318;
    matherial[9].thermalConductivity:=210;
@@ -743,7 +743,7 @@ begin
    matherial[9].multiplyerConductivityNormal:=1.0;
    matherial[9].alphaForTemperatureDepend:=0.0;
 
-   matherial[10].name:='Клей ЭЧЭС';
+   matherial[10].name:='РљР»РµР№ Р­Р§Р­РЎ';
    matherial[10].density:=1000;
    matherial[10].heatCapasity:=100;
    matherial[10].thermalConductivity:=4;
@@ -767,7 +767,7 @@ begin
    matherial[12].multiplyerConductivityNormal:=1.0;
    matherial[12].alphaForTemperatureDepend:=0.0;
 
-   matherial[13].name:='Д16';
+   matherial[13].name:='Р”16';
    matherial[13].density:=2800;
    matherial[13].heatCapasity:=921;
    matherial[13].thermalConductivity:=164;
@@ -775,7 +775,7 @@ begin
    matherial[13].multiplyerConductivityNormal:=1.0;
    matherial[13].alphaForTemperatureDepend:=0.0;
 
-   matherial[14].name:='Латунь';
+   matherial[14].name:='Р›Р°С‚СѓРЅСЊ';
    matherial[14].density:=8500;
    matherial[14].heatCapasity:=377;
    matherial[14].thermalConductivity:=109;
@@ -783,7 +783,7 @@ begin
    matherial[14].multiplyerConductivityNormal:=1.0;
    matherial[14].alphaForTemperatureDepend:=0.0;
 
-   matherial[15].name:='стекло';
+   matherial[15].name:='СЃС‚РµРєР»Рѕ';
    matherial[15].density:=2500;
    matherial[15].heatCapasity:=753;
    matherial[15].thermalConductivity:=0.85;
@@ -791,7 +791,7 @@ begin
    matherial[15].multiplyerConductivityNormal:=1.0;
    matherial[15].alphaForTemperatureDepend:=0.0;
 
-   matherial[16].name:='резина';
+   matherial[16].name:='СЂРµР·РёРЅР°';
    matherial[16].density:=1100;
    matherial[16].heatCapasity:=2005;
    matherial[16].thermalConductivity:=0.16;
@@ -807,7 +807,7 @@ begin
    matherial[17].multiplyerConductivityNormal:=1.0;
    matherial[17].alphaForTemperatureDepend:=0.0;
 
-   matherial[18].name:='фторопласт-3';
+   matherial[18].name:='С„С‚РѕСЂРѕРїР»Р°СЃС‚-3';
    matherial[18].density:=2150;
    matherial[18].heatCapasity:=1046;
    matherial[18].thermalConductivity:=0.058;
@@ -815,7 +815,7 @@ begin
    matherial[18].multiplyerConductivityNormal:=1.0;
    matherial[18].alphaForTemperatureDepend:=0.0;
 
-   matherial[19].name:='фторопласт-4';
+   matherial[19].name:='С„С‚РѕСЂРѕРїР»Р°СЃС‚-4';
    matherial[19].density:=2150;
    matherial[19].heatCapasity:=1046;
    matherial[19].thermalConductivity:=0.233;
@@ -831,7 +831,7 @@ begin
    matherial[20].multiplyerConductivityNormal:=1.0;
    matherial[20].alphaForTemperatureDepend:=0.0;
 
-   matherial[21].name:='сталь';
+   matherial[21].name:='СЃС‚Р°Р»СЊ';
    matherial[21].density:=7860;
    matherial[21].heatCapasity:=460;
    matherial[21].thermalConductivity:=16;
@@ -839,7 +839,7 @@ begin
    matherial[21].multiplyerConductivityNormal:=1.0;
    matherial[21].alphaForTemperatureDepend:=0.0;
 
-   matherial[22].name:='Ковар';
+   matherial[22].name:='РљРѕРІР°СЂ';
    matherial[22].density:=8300;
    matherial[22].heatCapasity:=669;
    matherial[22].thermalConductivity:=19;
@@ -887,7 +887,7 @@ begin
    matherial[27].multiplyerConductivityNormal:=1.0;
    matherial[27].alphaForTemperatureDepend:=0.0;
 
-   matherial[28].name:='КПТ-8';
+   matherial[28].name:='РљРџРў-8';
    matherial[28].density:=2800;
    matherial[28].heatCapasity:=1000;
    matherial[28].thermalConductivity:=0.7;
@@ -943,7 +943,7 @@ begin
    matherial[34].multiplyerConductivityNormal:=1.0;
    matherial[34].alphaForTemperatureDepend:=0.0;
 
-   matherial[35].name:='22ХС';
+   matherial[35].name:='22РҐРЎ';
    matherial[35].density:=3600;
    matherial[35].heatCapasity:=921;
    matherial[35].thermalConductivity:=32;
@@ -951,7 +951,7 @@ begin
    matherial[35].multiplyerConductivityNormal:=1.0;
    matherial[35].alphaForTemperatureDepend:=0.0;
 
-   matherial[36].name:='ПСР-72';
+   matherial[36].name:='РџРЎР -72';
    matherial[36].density:=10500;
    matherial[36].heatCapasity:=234;
    matherial[36].thermalConductivity:=300;
@@ -959,7 +959,7 @@ begin
    matherial[36].multiplyerConductivityNormal:=1.0;
    matherial[36].alphaForTemperatureDepend:=0.0;
 
-   matherial[37].name:='ПОС-60';
+   matherial[37].name:='РџРћРЎ-60';
    matherial[37].density:=9220;
    matherial[37].heatCapasity:=176;
    matherial[37].thermalConductivity:=50;
@@ -975,7 +975,7 @@ begin
    matherial[38].multiplyerConductivityNormal:=1.0;
    matherial[38].alphaForTemperatureDepend:=0.0;
 
-   matherial[39].name:='канифоль';
+   matherial[39].name:='РєР°РЅРёС„РѕР»СЊ';
    matherial[39].density:=1080;
    matherial[39].heatCapasity:=1340;
    matherial[39].thermalConductivity:=0.164;

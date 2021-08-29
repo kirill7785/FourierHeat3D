@@ -143,15 +143,15 @@ end;
 
 procedure TFormMatherials.ComboBox1Click(Sender: TObject);
 begin
-   // теплопроводность.
+   // С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ.
    Edit1.Text:=FloatToStr(FormTopology.matherial[ComboBox1.ItemIndex].thermalConductivity);
-   // ортотропность материала.
+   // РѕСЂС‚РѕС‚СЂРѕРїРЅРѕСЃС‚СЊ РјР°С‚РµСЂРёР°Р»Р°.
    Edit2.Text:=FloatToStr(FormTopology.matherial[ComboBox1.ItemIndex].multiplyerConductivityPlane);
    Edit3.Text:=FloatToStr(FormTopology.matherial[ComboBox1.ItemIndex].multiplyerConductivityNormal);
    Edit4.Text:=FloatToStr(FormTopology.matherial[ComboBox1.ItemIndex].alphaForTemperatureDepend);
 end;
 
-// Загружает библиотеку материалов.
+// Р—Р°РіСЂСѓР¶Р°РµС‚ Р±РёР±Р»РёРѕС‚РµРєСѓ РјР°С‚РµСЂРёР°Р»РѕРІ.
 procedure TFormMatherials.FormCreate(Sender: TObject);
 var
    i : Integer;

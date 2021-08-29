@@ -481,7 +481,7 @@ begin
 
 end;
 
-// Загружает библиотеку материалов.
+// Р—Р°РіСЂСѓР¶Р°РµС‚ Р±РёР±Р»РёРѕС‚РµРєСѓ РјР°С‚РµСЂРёР°Р»РѕРІ.
 procedure TFormLayers.FormCreate(Sender: TObject);
 var
   i : Integer;
