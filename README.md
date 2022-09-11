@@ -26,3 +26,7 @@ Windows 7, Windows 8, Windows 8.1 или Windows 10.
 ## О программе
 
 Программа FourierHeat3D сохраняет графики и поля температур в 2D и 3D в ASCII .dat формате программы tecplot 360.
+
+![alt_text](https://github.com/kirill7785/FourierHeat3D/blob/main/pic/topology%2020mm.png)
+![alt_text](https://github.com/kirill7785/FourierHeat3D/blob/main/pic/fet%2020mm.png)
+![alt_text](https://github.com/kirill7785/FourierHeat3D/blob/main/pic/fet%2020mm%20xy.png)
